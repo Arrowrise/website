@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArrowRise Co-Working Space — Premium workspace in Goldwins, Coimbatore. 36 workstations, Innovation Hub, from ₹149/day.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ArrowRise — Your Space to Rise">
+  <meta property="og:description" content="Premium co-working space in Goldwins, Coimbatore. Flexible plans from ₹149/day.">
+  <meta property="og:image" content="assets/images/space-01.png">
+  <title>ArrowRise — Your Space to Rise | Co-Working in Coimbatore</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg:          #FAFAF8;
+      --bg-alt:      #F2F1EC;
+      --bg-dark:     #111110;
+      --fg:          #111110;
+      --muted:       #79786F;
+      --border:      #E4E3DC;
+      --accent:      #E84B1C;
+      --accent-h:    #C83C12;
+      --accent-dim:  rgba(232,75,28,.09);
+      --white:       #FFFFFF;
+      --radius:      16px;
+      --radius-sm:   8px;
+      --max-w:       1200px;
+      --sec-pad:     96px;
+      --display:     'Syne', sans-serif;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────── */
+    .wrap          { max-width: var(--max-w); margin-inline: auto; padding-inline: 28px; }
+    .sec           { padding-block: var(--sec-pad); }
+    .sec--alt      { background: var(--bg-alt); }
+    .sec--dark     { background: var(--bg-dark); color: var(--white); }
+
+    /* ─── TYPE ───────────────────────────────────────────────── */
+    .eyebrow       { font: 600 .72rem/1 var(--display); letter-spacing: .13em; text-transform: uppercase; color: var(--accent); }
+    .display       { font: 800 clamp(3rem,5.5vw,5.25rem)/1.0 var(--display); letter-spacing: -.03em; }
+    .h2            { font: 700 clamp(2rem,3.5vw,3.25rem)/1.1 var(--display); letter-spacing: -.025em; }
+    .h3            { font: 700 1.25rem/1.2 var(--display); letter-spacing: -.01em; }
+
+    /* ─── BUTTONS ────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 100px;
+      font: 600 .9rem/1 'Inter', sans-serif;
+      cursor: pointer; transition: all .2s; border: none;
+    }
+    .btn-primary   { background: var(--accent); color: var(--white); }
+    .btn-primary:hover { background: var(--accent-h); transform: translateY(-1px); }
+    .btn-outline   { background: transparent; color: var(--fg); border: 1.5px solid var(--border); }
+    .btn-outline:hover { border-color: var(--fg); }
+    .btn-ghost-w   { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.28); }
+    .btn-ghost-w:hover { border-color: var(--white); background: rgba(255,255,255,.06); }
+    .btn-white     { background: var(--white); color: var(--accent); }
+    .btn-white:hover { background: #f0eeec; }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; inset: 0 0 auto; z-index: 900;
+      padding-block: 20px;
+      transition: background .3s, box-shadow .3s, padding .3s;
+    }
+    .nav.scrolled {
+      background: rgba(250,250,248,.92);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--border);
+      padding-block: 14px;
+    }
+    .nav__row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .nav__logo {
+      font: 800 1.35rem/1 var(--display); letter-spacing: -.03em;
+      display: flex; align-items: center; gap: 2px;
+    }
+    .nav__logo-arr { color: var(--accent); }
+    .nav__links { display: flex; align-items: center; gap: 36px; }
+    .nav__links a { font: 500 .875rem/1 'Inter',sans-serif; color: var(--fg); opacity: .75; transition: opacity .2s; }
+    .nav__links a:hover { opacity: 1; }
+    .nav__right { display: flex; align-items: center; gap: 14px; }
+    .nav__phone { font: 500 .82rem/1 'Inter',sans-serif; color: var(--muted); }
+    .nav__burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav__burger span { display: block; width: 24px; height: 2px; background: var(--fg); border-radius: 2px; transition: all .3s; }
+
+    /* mobile menu */
+    .mob-menu {
+      display: none; position: fixed; inset: 0; z-index: 899;
+      background: var(--bg); flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu__close { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 1.4rem; cursor: pointer; }
+    .mob-menu a { font: 700 2rem/1 var(--display); color: var(--fg); }
+    .mob-menu a:hover { color: var(--accent); }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 100vh; position: relative; overflow: hidden;
+    }
+    .hero__bg-word {
+      position: absolute; right: 0; bottom: 20px;
+      font: 800 clamp(9rem,22vw,24rem)/1 var(--display);
+      letter-spacing: -.04em; color: var(--bg-alt);
+      pointer-events: none; user-select: none; z-index: 0;
+      transform: translateX(8%);
+    }
+    .hero__left {
+      position: relative; z-index: 1;
+      padding-block: 80px;
+      padding-left: max(28px, calc((100vw - var(--max-w)) / 2 + 28px));
+      padding-right: 56px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .hero__pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: 100px; padding: 6px 14px; width: fit-content; margin-bottom: 32px;
+    }
+    .hero__pill-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    .hero__pill span { font: 500 .78rem/1 'Inter',sans-serif; color: var(--muted); }
+    .hero__head { margin-bottom: 22px; }
+    .hero__head em { font-style: normal; color: var(--accent); }
+    .hero__sub {
+      font: 400 1.05rem/1.72 'Inter',sans-serif; color: var(--muted);
+      max-width: 400px; margin-bottom: 40px;
+    }
+    .hero__ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero__stats { display: flex; align-items: center; gap: 24px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .hero__stat { display: flex; flex-direction: column; gap: 4px; }
+    .hero__stat-v { font: 700 1.5rem/1 var(--display); letter-spacing: -.02em; }
+    .hero__stat-l { font: 600 .72rem/1 'Inter',sans-serif; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+    .hero__stat-div { width: 1px; height: 32px; background: var(--border); }
+    .hero__right { position: relative; overflow: hidden; }
+    .hero__img { width: 100%; height: 100%; object-fit: cover; }
+    .hero__float {
+      position: absolute; bottom: 48px; left: -24px;
+      background: var(--white); border-radius: var(--radius);
+      padding: 20px 24px; box-shadow: 0 16px 56px rgba(0,0,0,.13);
+      min-width: 220px;
+    }
+    .hero__float-avail { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .hero__float-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
+    .hero__float-avail span { font: 600 .78rem/1 'Inter',sans-serif; color: #22c55e; }
+    .hero__float-type { font: 700 1.05rem/1 var(--display); margin-bottom: 6px; }
+    .hero__float-price { font: 400 .82rem/1 'Inter',sans-serif; color: var(--muted); }
+    .hero__float-price strong { color: var(--accent); font-size: 1.1rem; }
+
+    /* ─── TICKER ─────────────────────────────────────────────── */
+    .ticker { border-block: 1px solid var(--border); overflow: hidden; padding-block: 15px; }
+    .ticker__track { display: flex; animation: ticker-roll 28s linear infinite; white-space: nowrap; }
+    .ticker__item { flex-shrink: 0; display: flex; align-items: center; gap: 22px; padding-right: 44px; }
+    .ticker__item span { font: 500 .875rem/1 'Inter',sans-serif; color: var(--muted); }
+    .ticker__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+    @keyframes ticker-roll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── FEATURES ───────────────────────────────────────────── */
+    .feat__header { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 56px; }
+    .feat__header-desc { font: 400 .975rem/1.75 'Inter',sans-serif; color: var(--muted); }
+    .feat__grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .feat-card { background: var(--bg); padding: 30px 26px; display: flex; flex-direction: column; gap: 14px; transition: background .2s; }
+    .feat-card:hover { background: var(--bg-alt); }
+    .feat-card__ico {
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      background: var(--accent-dim); border-radius: var(--radius-sm); font-size: 1.2rem; flex-shrink: 0;
+    }
+    .feat-card__title { font: 700 1rem/1.2 var(--display); }
+    .feat-card__desc  { font: 400 .84rem/1.6 'Inter',sans-serif; color: var(--muted); }
+
+    /* ─── SPACES ─────────────────────────────────────────────── */
+    .spaces__hdr { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 44px; }
+    .spaces__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .sp-card { background: var(--bg-alt); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .3s; }
+    .sp-card:hover { transform: translateY(-5px); }
+    .sp-card--hot { background: var(--accent); color: var(--white); }
+    .sp-card__img { height: 200px; overflow: hidden; }
+    .sp-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+    .sp-card:hover .sp-card__img img { transform: scale(1.06); }
+    .sp-card__body { padding: 22px; flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .sp-card__tag {
+      display: inline-flex; align-items: center;
+      padding: 4px 12px; border-radius: 100px;
+      font: 600 .72rem/1 'Inter',sans-serif;
+      background: var(--bg); color: var(--muted); width: fit-content;
+    }
+    .sp-card--hot .sp-card__tag { background: rgba(255,255,255,.2); color: var(--white); }
+    .sp-card__name  { font: 700 1.15rem/1.2 var(--display); }
+    .sp-card__desc  { font: 400 .84rem/1.6 'Inter',sans-serif; color: var(--muted); flex: 1; }
+    .sp-card--hot .sp-card__desc { color: rgba(255,255,255,.75); }
+    .sp-card__price { font: 400 .82rem/1 'Inter',sans-serif; margin-top: auto; padding-top: 8px; }
+    .sp-card__price strong { font-family: var(--display); font-size: 1.3rem; font-weight: 800; color: var(--accent); }
+    .sp-card--hot .sp-card__price strong { color: var(--white); }
+
+    /* ─── GALLERY ────────────────────────────────────────────── */
+    .gal__grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 300px 300px;
+      gap: 10px;
+    }
+    .gal__item { border-radius: var(--radius); overflow: hidden; }
+    .gal__item:nth-child(1) { grid-column: 1/6; grid-row: 1/3; }
+    .gal__item:nth-child(2) { grid-column: 6/9; }
+    .gal__item:nth-child(3) { grid-column: 9/13; }
+    .gal__item:nth-child(4) { grid-column: 6/10; }
+    .gal__item:nth-child(5) { grid-column: 10/13; }
+    .gal__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .gal__item:hover img { transform: scale(1.06); }
+
+    /* ─── PRICING ────────────────────────────────────────────── */
+    .pricing__hdr { text-align: center; margin-bottom: 52px; }
+    .pricing__hdr .eyebrow { display: block; margin-bottom: 16px; }
+    .pricing__hdr-note { font: 400 .9rem/1 'Inter',sans-serif; color: var(--muted); margin-top: 14px; }
+    .pricing__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+    .p-card {
+      background: var(--bg-alt); border: 1.5px solid var(--border);
+      border-radius: var(--radius); padding: 30px 24px;
+      display: flex; flex-direction: column; gap: 18px;
+      position: relative; transition: border-color .2s, box-shadow .2s, transform .2s;
+    }
+    .p-card:hover { border-color: var(--accent); box-shadow: 0 8px 36px rgba(232,75,28,.1); transform: translateY(-4px); }
+    .p-card--feat { background: var(--fg); border-color: var(--fg); color: var(--white); }
+    .p-card--feat:hover { border-color: var(--fg); box-shadow: 0 8px 36px rgba(0,0,0,.22); }
+    .p-card__badge {
+      position: absolute; top: -12px; left: 24px;
+      background: var(--accent); color: var(--white);
+      font: 700 .7rem/1 'Inter',sans-serif; letter-spacing: .07em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 100px;
+    }
+    .p-card__name  { font: 700 1.05rem/1 var(--display); }
+    .p-card__for   { font: 400 .8rem/1 'Inter',sans-serif; color: var(--muted); }
+    .p-card--feat .p-card__for { color: rgba(255,255,255,.55); }
+    .p-card__sep   { height: 1px; background: var(--border); }
+    .p-card--feat .p-card__sep { background: rgba(255,255,255,.14); }
+    .p-card__price { font: 800 2.5rem/1 var(--display); letter-spacing: -.03em; }
+    .p-card--feat .p-card__price { color: var(--accent); }
+    .p-card__per   { font: 400 .82rem/1 'Inter',sans-serif; color: var(--muted); margin-top: 6px; }
+    .p-card--feat .p-card__per { color: rgba(255,255,255,.55); }
+    .p-card__feats { display: flex; flex-direction: column; gap: 9px; }
+    .p-card__feats li { font: 400 .84rem/1 'Inter',sans-serif; display: flex; align-items: center; gap: 8px; }
+    .p-card__feats li::before { content: "✓"; font-weight: 700; color: var(--accent); flex-shrink: 0; }
+    .p-card__cta { margin-top: auto; }
+    .p-card__cta .btn { width: 100%; justify-content: center; }
+    .pricing__team {
+      background: var(--bg-alt); border: 1.5px dashed var(--border);
+      border-radius: var(--radius); padding: 30px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    }
+    .pricing__team h3 { font: 700 1.3rem/1.2 var(--display); margin-bottom: 8px; }
+    .pricing__team p  { font: 400 .9rem/1.6 'Inter',sans-serif; color: var(--muted); max-width: 520px; }
+
+    /* ─── INNOVATION HUB ─────────────────────────────────────── */
+    .hub__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .hub__eyebrow { color: var(--accent); display: block; margin-bottom: 22px; }
+    .hub__title { font: 800 clamp(2rem,3vw,3rem)/1.1 var(--display); letter-spacing: -.02em; color: var(--white); margin-bottom: 18px; }
+    .hub__desc  { font: 400 .975rem/1.75 'Inter',sans-serif; color: rgba(255,255,255,.6); margin-bottom: 36px; }
+    .hub__grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 36px; }
+    .hub__item  {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-sm); padding: 16px 18px;
+      transition: background .2s;
+    }
+    .hub__item:hover { background: rgba(255,255,255,.1); }
+    .hub__item-ico  { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; background: rgba(232,75,28,.18); border-radius: var(--radius-sm); font-size: 1.25rem; flex-shrink: 0; }
+    .hub__item-name { font: 600 .9rem/1 var(--display); color: var(--white); }
+    .hub__img-wrap  { border-radius: var(--radius); overflow: hidden; height: 480px; position: relative; }
+    .hub__img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .hub__badge {
+      position: absolute; bottom: -18px; left: -18px;
+      background: var(--accent); border-radius: var(--radius); padding: 18px 22px; color: var(--white);
+    }
+    .hub__badge-l { font: 600 .75rem/1 'Inter',sans-serif; opacity: .8; margin-bottom: 6px; }
+    .hub__badge-v { font: 800 1.4rem/1 var(--display); }
+
+    /* ─── AUDIENCE ───────────────────────────────────────────── */
+    .aud__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 48px; }
+    .aud-card  {
+      background: var(--bg-alt); border-radius: var(--radius); padding: 26px 18px;
+      text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;
+      transition: all .22s; cursor: default;
+    }
+    .aud-card:hover { background: var(--accent); color: var(--white); transform: translateY(-4px); }
+    .aud-card__ico   { font-size: 2rem; }
+    .aud-card__title { font: 700 .975rem/1.2 var(--display); }
+    .aud-card__desc  { font: 400 .8rem/1.55 'Inter',sans-serif; color: var(--muted); }
+    .aud-card:hover .aud-card__desc { color: rgba(255,255,255,.8); }
+
+    /* ─── EVENTS ─────────────────────────────────────────────── */
+    .ev__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .ev__list  { display: flex; flex-direction: column; gap: 0; margin-top: 36px; }
+    .ev__item  {
+      display: flex; align-items: center; gap: 18px;
+      padding-block: 17px; border-bottom: 1px solid var(--border);
+      cursor: default;
+    }
+    .ev__item:first-child { border-top: 1px solid var(--border); }
+    .ev__num   { font: 700 .8rem/1 var(--display); color: var(--accent); width: 28px; flex-shrink: 0; }
+    .ev__name  { font: 600 1.025rem/1.2 var(--display); flex: 1; }
+    .ev__arr   { color: var(--muted); font-size: 1rem; transition: transform .2s, color .2s; }
+    .ev__item:hover .ev__arr { transform: translateX(5px); color: var(--accent); }
+    .ev__img   { border-radius: var(--radius); overflow: hidden; height: 480px; }
+    .ev__img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ─── CTA BAND ───────────────────────────────────────────── */
+    .cta-band { background: var(--accent); padding-block: 72px; }
+    .cta-band__inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .cta-band__title { font: 800 clamp(2rem,4vw,3.5rem)/1 var(--display); color: var(--white); letter-spacing: -.025em; }
+    .cta-band__btns  { display: flex; gap: 12px; flex-shrink: 0; }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    .contact__grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start; }
+    .contact__info { display: flex; flex-direction: column; gap: 28px; }
+    .contact__field-lbl { font: 600 .72rem/1 'Inter',sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .contact__field-val { font: 700 1.05rem/1.5 var(--display); }
+    .contact__field-sub { font: 400 .85rem/1 'Inter',sans-serif; color: var(--muted); margin-top: 4px; }
+    .contact__hours {
+      background: var(--bg-alt); border-radius: var(--radius); padding: 22px;
+    }
+    .contact__hours h4 { font: 700 .9rem/1 var(--display); margin-bottom: 14px; }
+    .contact__hr { display: flex; justify-content: space-between; font: 400 .85rem/1 'Inter',sans-serif; padding-block: 9px; border-bottom: 1px solid var(--border); }
+    .contact__hr:last-child { border-bottom: none; }
+    .contact__hr-d { color: var(--muted); }
+    .contact__map  { border-radius: var(--radius); overflow: hidden; height: 420px; border: 1px solid var(--border); }
+    .contact__map iframe { width: 100%; height: 100%; border: none; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    .footer { background: var(--bg-dark); color: var(--white); padding-top: 60px; padding-bottom: 28px; }
+    .footer__top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 44px;
+      padding-bottom: 44px; border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer__logo { font: 800 1.45rem/1 var(--display); margin-bottom: 14px; }
+    .footer__logo span { color: var(--accent); }
+    .footer__desc { font: 400 .875rem/1.7 'Inter',sans-serif; color: rgba(255,255,255,.45); max-width: 280px; margin-bottom: 22px; }
+    .footer__socials { display: flex; gap: 10px; }
+    .footer__soc {
+      width: 36px; height: 36px; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.08); display: flex; align-items: center; justify-content: center;
+      font: 700 .82rem/1 'Inter',sans-serif; transition: background .2s;
+    }
+    .footer__soc:hover { background: var(--accent); }
+    .footer__col-h  { font: 700 .875rem/1 var(--display); margin-bottom: 18px; }
+    .footer__col-links { display: flex; flex-direction: column; gap: 11px; }
+    .footer__col-links a { font: 400 .875rem/1 'Inter',sans-serif; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer__col-links a:hover { color: var(--white); }
+    .footer__addr { font: 400 .84rem/1.65 'Inter',sans-serif; color: rgba(255,255,255,.35); }
+    .footer__bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 28px; gap: 14px; }
+    .footer__copy  { font: 400 .78rem/1 'Inter',sans-serif; color: rgba(255,255,255,.3); }
+    .footer__blnks { display: flex; gap: 22px; }
+    .footer__blnks a { font: 400 .78rem/1 'Inter',sans-serif; color: rgba(255,255,255,.3); transition: color .2s; }
+    .footer__blnks a:hover { color: var(--white); }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .18s; } .d3 { transition-delay: .26s; } .d4 { transition-delay: .34s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      :root { --sec-pad: 72px; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero__left { padding-right: 28px; padding-top: 120px; padding-bottom: 56px; }
+      .hero__right { height: 50vh; }
+      .hero__bg-word { display: none; }
+      .feat__header { grid-template-columns: 1fr; }
+      .feat__grid { grid-template-columns: repeat(2, 1fr); }
+      .spaces__grid { grid-template-columns: 1fr 1fr; }
+      .pricing__grid { grid-template-columns: 1fr 1fr; }
+      .hub__inner { grid-template-columns: 1fr; gap: 44px; }
+      .hub__img-wrap { height: 320px; }
+      .aud__grid { grid-template-columns: repeat(3, 1fr); }
+      .ev__inner { grid-template-columns: 1fr; gap: 44px; }
+      .ev__img { height: 300px; }
+      .cta-band__inner { flex-direction: column; text-align: center; }
+      .contact__grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact__map { height: 300px; }
+      .footer__top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      :root { --sec-pad: 52px; }
+      .nav__links, .nav__right .btn, .nav__phone { display: none; }
+      .nav__burger { display: flex; }
+      .feat__grid { grid-template-columns: 1fr; }
+      .spaces__grid { grid-template-columns: 1fr; }
+      .gal__grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gal__item { grid-column: span 1 !important; grid-row: span 1 !important; height: 200px; }
+      .pricing__grid { grid-template-columns: 1fr; }
+      .pricing__team { flex-direction: column; text-align: center; }
+      .aud__grid { grid-template-columns: 1fr 1fr; }
+      .footer__top { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+      .cta-band__btns { flex-direction: column; }
+    }
+    @media (max-width: 480px) {
+      .hero__ctas { flex-direction: column; align-items: flex-start; }
+      .hero__stats { flex-wrap: wrap; gap: 16px; }
+      .aud__grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <div class="wrap">
+    <div class="nav__row">
+      <a href="#" class="nav__logo">Arrow<span class="nav__logo-arr">↑</span>Rise</a>
+      <ul class="nav__links">
+        <li><a href="#spaces">Spaces</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#innovation">Innovation Hub</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav__right">
+        <span class="nav__phone">+91 98423 84597</span>
+        <a href="#contact" class="btn btn-primary">Book a Tour</a>
+      </div>
+      <button class="nav__burger" id="burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-menu__close" id="mobClose">✕</button>
+  <a href="#spaces"      class="mob-link">Spaces</a>
+  <a href="#pricing"     class="mob-link">Pricing</a>
+  <a href="#innovation"  class="mob-link">Innovation Hub</a>
+  <a href="#events"      class="mob-link">Events</a>
+  <a href="#contact"     class="mob-link">Contact</a>
+  <a href="#contact" class="btn btn-primary">Book a Tour</a>
+  <span style="font:.5rem/1 Inter,sans-serif;font-size:.9rem;color:var(--muted)">+91 98423 84597</span>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero__left">
+    <span class="hero__bg-word">RISE</span>
+    <div class="hero__pill">
+      <div class="hero__pill-dot"></div>
+      <span>Goldwins, Coimbatore — Now Open</span>
+    </div>
+    <h1 class="display hero__head">
+      Your Space<br>to <em>Rise. ↑</em>
+    </h1>
+    <p class="hero__sub">
+      Premium co-working in the heart of Goldwins. 36 workstations, high-speed internet, and a community built for people who mean business.
+    </p>
+    <div class="hero__ctas">
+      <a href="#pricing"  class="btn btn-primary">Book a Seat →</a>
+      <a href="#contact"  class="btn btn-outline">Take a Tour</a>
+    </div>
+    <div class="hero__stats">
+      <div class="hero__stat"><span class="hero__stat-v">36</span><span class="hero__stat-l">Workstations</span></div>
+      <div class="hero__stat-div"></div>
+      <div class="hero__stat"><span class="hero__stat-v">1,800</span><span class="hero__stat-l">sq. ft.</span></div>
+      <div class="hero__stat-div"></div>
+      <div class="hero__stat"><span class="hero__stat-v">₹149</span><span class="hero__stat-l">Starting/Day</span></div>
+    </div>
+  </div>
+
+  <div class="hero__right">
+    <img
+      class="hero__img"
+      src="assets/images/space-06.png"
+      alt="ArrowRise co-working interior"
+    >
+    <div class="hero__float">
+      <div class="hero__float-avail">
+        <div class="hero__float-dot"></div>
+        <span>Seats Available Now</span>
+      </div>
+      <div class="hero__float-type">Dedicated Desk</div>
+      <div class="hero__float-price">From <strong>₹4,999</strong>/month</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TICKER
+══════════════════════════════════════════════════════════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <div class="ticker__item"><span>Work</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Innovate</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Grow</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Goldwins, Coimbatore</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Premium Co-Working</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>36 Workstations</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Innovation Hub</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>From ₹149/day</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Work</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Innovate</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Grow</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Goldwins, Coimbatore</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Premium Co-Working</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>36 Workstations</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>Innovation Hub</span><div class="ticker__dot"></div></div>
+    <div class="ticker__item"><span>From ₹149/day</span><div class="ticker__dot"></div></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     WHY ARROWRISE
+══════════════════════════════════════════════════════════ -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="feat__header">
+      <div>
+        <span class="eyebrow">Why ArrowRise</span>
+        <h2 class="h2" style="margin-top:16px;">Built for those<br>who build.</h2>
+      </div>
+      <p class="feat__header-desc">
+        More than a desk — ArrowRise is a professionally designed environment where entrepreneurs, freelancers, and startups do their best work. Every detail is intentional, from connectivity to community.
+      </p>
+    </div>
+
+    <div class="feat__grid">
+      <div class="feat-card reveal">
+        <div class="feat-card__ico">📶</div>
+        <div class="feat-card__title">High-Speed Wi-Fi</div>
+        <div class="feat-card__desc">Fiber broadband, always on. Your deadlines won't wait and neither will your connection.</div>
+      </div>
+      <div class="feat-card reveal d1">
+        <div class="feat-card__ico">❄️</div>
+        <div class="feat-card__title">Air-Conditioned</div>
+        <div class="feat-card__desc">Climate-controlled, distraction-free environment designed for sustained focus and comfort.</div>
+      </div>
+      <div class="feat-card reveal d2">
+        <div class="feat-card__ico">⚡</div>
+        <div class="feat-card__title">Power Backup</div>
+        <div class="feat-card__desc">Uninterrupted power supply. Outages are their problem, not yours.</div>
+      </div>
+      <div class="feat-card reveal d3">
+        <div class="feat-card__ico">🤝</div>
+        <div class="feat-card__title">Community & Events</div>
+        <div class="feat-card__desc">Regular startup meetups, workshops, and networking events to grow your connections.</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-card__ico">🏢</div>
+        <div class="feat-card__title">Meeting Rooms</div>
+        <div class="feat-card__desc">Private, equipped spaces for client meetings, presentations, and team discussions.</div>
+      </div>
+      <div class="feat-card reveal d1">
+        <div class="feat-card__ico">📦</div>
+        <div class="feat-card__title">Business Address</div>
+        <div class="feat-card__desc">Register your business at our Goldwins address. Professional presence without the overhead.</div>
+      </div>
+      <div class="feat-card reveal d2">
+        <div class="feat-card__ico">📅</div>
+        <div class="feat-card__title">Flexible Plans</div>
+        <div class="feat-card__desc">Daily to monthly — no long-term lock-ins. Scale up or down as your work evolves.</div>
+      </div>
+      <div class="feat-card reveal d3">
+        <div class="feat-card__ico">🚗</div>
+        <div class="feat-card__title">Easy Parking</div>
+        <div class="feat-card__desc">Ample parking space available. Getting here should be the easiest part of your day.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SPACES
+══════════════════════════════════════════════════════════ -->
+<section class="sec sec--alt" id="spaces">
+  <div class="wrap">
+    <div class="spaces__hdr">
+      <div>
+        <span class="eyebrow">Our Spaces</span>
+        <h2 class="h2" style="margin-top:16px;">A seat for every<br>kind of work.</h2>
+      </div>
+      <a href="#pricing" class="btn btn-outline">See Pricing →</a>
+    </div>
+
+    <div class="spaces__grid reveal">
+      <!-- Hot Desk -->
+      <div class="sp-card">
+        <div class="sp-card__img">
+          <img src="assets/images/space-02.png" alt="Hot Desk">
+        </div>
+        <div class="sp-card__body">
+          <span class="sp-card__tag">Flexible</span>
+          <h3 class="sp-card__name">Hot Desk</h3>
+          <p class="sp-card__desc">Grab any available seat when you arrive. Ideal for travelers, one-time visitors, and freelancers on the move.</p>
+          <div class="sp-card__price">From <strong>₹149</strong> /day</div>
+        </div>
+      </div>
+
+      <!-- Dedicated Desk – FEATURED -->
+      <div class="sp-card sp-card--hot">
+        <div class="sp-card__body" style="padding-top:32px;">
+          <span class="sp-card__tag">★ Most Popular</span>
+          <h3 class="sp-card__name">Dedicated Desk</h3>
+          <p class="sp-card__desc">Your own reserved workstation, always ready for you. Personalise it, lock it, and return to it every single day.</p>
+          <div class="sp-card__price">From <strong>₹4,999</strong> /month</div>
+        </div>
+      </div>
+
+      <!-- Private Office -->
+      <div class="sp-card">
+        <div class="sp-card__img">
+          <img src="assets/images/space-03.png" alt="Private Office">
+        </div>
+        <div class="sp-card__body">
+          <span class="sp-card__tag">Teams</span>
+          <h3 class="sp-card__name">Private Office</h3>
+          <p class="sp-card__desc">A dedicated enclosed workspace for your team — full customisation, zero compromise on privacy or focus.</p>
+          <div class="sp-card__price">Contact us for pricing</div>
+        </div>
+      </div>
+
+      <!-- Meeting Room -->
+      <div class="sp-card">
+        <div class="sp-card__img">
+          <img src="assets/images/space-04.png" alt="Meeting Room">
+        </div>
+        <div class="sp-card__body">
+          <span class="sp-card__tag">Hourly Booking</span>
+          <h3 class="sp-card__name">Meeting Room</h3>
+          <p class="sp-card__desc">Professional, fully equipped rooms for client presentations, interviews, and team sync-ups.</p>
+          <div class="sp-card__price">Book by the hour</div>
+        </div>
+      </div>
+
+      <!-- Virtual / Business Address -->
+      <div class="sp-card">
+        <div class="sp-card__img">
+          <img src="assets/images/space-05.png" alt="Virtual Office">
+        </div>
+        <div class="sp-card__body">
+          <span class="sp-card__tag">Remote-Friendly</span>
+          <h3 class="sp-card__name">Virtual / Business Address</h3>
+          <p class="sp-card__desc">Register your business at our Goldwins address — a credible Coimbatore presence without the full-time overhead.</p>
+          <div class="sp-card__price">Contact for details</div>
+        </div>
+      </div>
+
+      <!-- Event Space -->
+      <div class="sp-card">
+        <div class="sp-card__img">
+          <img src="assets/images/space-08.png" alt="Event Space">
+        </div>
+        <div class="sp-card__body">
+          <span class="sp-card__tag">Events</span>
+          <h3 class="sp-card__name">Event Space</h3>
+          <p class="sp-card__desc">Host workshops, training programmes, and networking events in a professional, fully serviced setting.</p>
+          <div class="sp-card__price">Daily &amp; hourly rates available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     GALLERY
+══════════════════════════════════════════════════════════ -->
+<section class="sec" style="padding-bottom:0" id="gallery">
+  <div class="wrap" style="margin-bottom:36px;">
+    <span class="eyebrow">The Space</span>
+    <h2 class="h2" style="margin-top:16px;">See it for yourself.</h2>
+  </div>
+  <div class="wrap">
+    <div class="gal__grid reveal">
+      <div class="gal__item">
+        <img src="assets/images/space-01.png" alt="Interior overview">
+      </div>
+      <div class="gal__item">
+        <img src="assets/images/space-02.png" alt="Workstation area">
+      </div>
+      <div class="gal__item">
+        <img src="assets/images/space-03.png" alt="Focused workspace">
+      </div>
+      <div class="gal__item">
+        <img src="assets/images/space-04.png" alt="Community collaboration">
+      </div>
+      <div class="gal__item">
+        <img src="assets/images/space-05.png" alt="Meeting room">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PRICING
+══════════════════════════════════════════════════════════ -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="pricing__hdr">
+      <span class="eyebrow">Membership Plans</span>
+      <h2 class="h2">Flexible pricing, zero lock-ins.</h2>
+      <p class="pricing__hdr-note">All plans include Wi-Fi, power backup, air-conditioning, and community access.</p>
+    </div>
+
+    <div class="pricing__grid">
+      <!-- Daily -->
+      <div class="p-card reveal">
+        <div class="p-card__name">Daily Pass</div>
+        <div class="p-card__for">Walk in anytime — no commitment</div>
+        <div class="p-card__sep"></div>
+        <div>
+          <div class="p-card__price">₹149</div>
+          <div class="p-card__per">per day</div>
+        </div>
+        <ul class="p-card__feats">
+          <li>Any available hot desk</li>
+          <li>High-speed Wi-Fi</li>
+          <li>Power backup</li>
+          <li>Common area access</li>
+        </ul>
+        <div class="p-card__cta">
+          <a href="tel:+919842384597" class="btn btn-outline">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- Weekly -->
+      <div class="p-card reveal d1">
+        <div class="p-card__name">Weekly Pass</div>
+        <div class="p-card__for">Short-term projects &amp; visits</div>
+        <div class="p-card__sep"></div>
+        <div>
+          <div class="p-card__price">₹1,199</div>
+          <div class="p-card__per">per week</div>
+        </div>
+        <ul class="p-card__feats">
+          <li>Any available hot desk</li>
+          <li>High-speed Wi-Fi</li>
+          <li>Power backup</li>
+          <li>Common area access</li>
+          <li>Community events invite</li>
+        </ul>
+        <div class="p-card__cta">
+          <a href="tel:+919842384597" class="btn btn-outline">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- Monthly Flexi -->
+      <div class="p-card reveal d2">
+        <div class="p-card__name">Monthly Flexi</div>
+        <div class="p-card__for">Any available seat, any day</div>
+        <div class="p-card__sep"></div>
+        <div>
+          <div class="p-card__price">₹2,399</div>
+          <div class="p-card__per">per month</div>
+        </div>
+        <ul class="p-card__feats">
+          <li>Any available hot desk</li>
+          <li>Priority access</li>
+          <li>High-speed Wi-Fi</li>
+          <li>Power backup</li>
+          <li>Full community access</li>
+          <li>Networking events</li>
+        </ul>
+        <div class="p-card__cta">
+          <a href="tel:+919842384597" class="btn btn-outline">Get Started →</a>
+        </div>
+      </div>
+
+      <!-- Dedicated Desk -->
+      <div class="p-card p-card--feat reveal d3">
+        <div class="p-card__badge">★ Best Value</div>
+        <div class="p-card__name">Dedicated Desk</div>
+        <div class="p-card__for">Your own reserved workstation</div>
+        <div class="p-card__sep"></div>
+        <div>
+          <div class="p-card__price">₹4,999</div>
+          <div class="p-card__per">per month</div>
+        </div>
+        <ul class="p-card__feats">
+          <li>Reserved workstation (yours)</li>
+          <li>Lockable personal storage</li>
+          <li>Priority meeting room access</li>
+          <li>Dedicated high-speed Wi-Fi</li>
+          <li>Business address option</li>
+          <li>All-day, every-day access</li>
+          <li>VIP community access</li>
+        </ul>
+        <div class="p-card__cta">
+          <a href="tel:+919842384597" class="btn btn-primary">Book Your Desk →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team CTA -->
+    <div class="pricing__team reveal">
+      <div>
+        <h3>Team Space &amp; Private Office</h3>
+        <p>Need a dedicated space for your entire team? We offer customised pricing for startups, remote teams, and corporations setting up a satellite office in Coimbatore.</p>
+      </div>
+      <a href="tel:+919842384597" class="btn btn-primary" style="flex-shrink:0;">Talk to Kavin →</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     INNOVATION HUB
+══════════════════════════════════════════════════════════ -->
+<section class="sec sec--dark" id="innovation">
+  <div class="wrap">
+    <div class="hub__inner">
+      <div>
+        <span class="eyebrow hub__eyebrow">ArrowRise Innovation Hub</span>
+        <h2 class="hub__title">Where work meets<br>the future.</h2>
+        <p class="hub__desc">ArrowRise isn't just a desk. Our Innovation Hub is a hands-on technology training centre embedded within the co-working space — the only place in Goldwins where you can work and learn under the same roof.</p>
+        <div class="hub__grid">
+          <div class="hub__item">
+            <div class="hub__item-ico">🤖</div>
+            <span class="hub__item-name">Robotics Training</span>
+          </div>
+          <div class="hub__item">
+            <div class="hub__item-ico">🧠</div>
+            <span class="hub__item-name">AI Programs</span>
+          </div>
+          <div class="hub__item">
+            <div class="hub__item-ico">🚁</div>
+            <span class="hub__item-name">Drone Technology</span>
+          </div>
+          <div class="hub__item">
+            <div class="hub__item-ico">🖨️</div>
+            <span class="hub__item-name">3D Printing</span>
+          </div>
+          <div class="hub__item">
+            <div class="hub__item-ico">🥽</div>
+            <span class="hub__item-name">VR Experiences</span>
+          </div>
+          <div class="hub__item">
+            <div class="hub__item-ico">💡</div>
+            <span class="hub__item-name">STEM Education</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn btn-ghost-w">Enquire About Hub Programs →</a>
+      </div>
+
+      <div class="hub__img-wrap reveal">
+        <img src="assets/images/space-07.png" alt="Innovation Hub">
+        <div class="hub__badge">
+          <div class="hub__badge-l">Innovation Hub</div>
+          <div class="hub__badge-v">Tech + Co-working</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     IDEAL FOR
+══════════════════════════════════════════════════════════ -->
+<section class="sec" id="audience">
+  <div class="wrap">
+    <span class="eyebrow">Ideal For</span>
+    <h2 class="h2" style="margin-top:16px;">Made for makers,<br>builders, and doers.</h2>
+
+    <div class="aud__grid">
+      <div class="aud-card reveal">
+        <div class="aud-card__ico">💻</div>
+        <div class="aud-card__title">Freelancers</div>
+        <div class="aud-card__desc">Designers, developers, consultants — get out of your home and into focus.</div>
+      </div>
+      <div class="aud-card reveal d1">
+        <div class="aud-card__ico">🚀</div>
+        <div class="aud-card__title">Startups</div>
+        <div class="aud-card__desc">Affordable office space, no long-term commitments. Build fast, move fast.</div>
+      </div>
+      <div class="aud-card reveal d2">
+        <div class="aud-card__ico">🌐</div>
+        <div class="aud-card__title">Remote Workers</div>
+        <div class="aud-card__desc">A professional setup away from home. Structured, quiet, and productive.</div>
+      </div>
+      <div class="aud-card reveal d3">
+        <div class="aud-card__ico">📋</div>
+        <div class="aud-card__title">Trainers &amp; Coaches</div>
+        <div class="aud-card__desc">Conduct workshops, classes, and seminars in a fully equipped venue.</div>
+      </div>
+      <div class="aud-card reveal d4">
+        <div class="aud-card__ico">💼</div>
+        <div class="aud-card__title">Entrepreneurs</div>
+        <div class="aud-card__desc">Find collaborators, build connections, and grow your idea into a real business.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     EVENTS
+══════════════════════════════════════════════════════════ -->
+<section class="sec sec--alt" id="events">
+  <div class="wrap">
+    <div class="ev__inner">
+      <div>
+        <span class="eyebrow">Meeting &amp; Events</span>
+        <h2 class="h2" style="margin-top:16px;">Host your best<br>moments here.</h2>
+        <p style="font-size:.95rem;color:var(--muted);margin-top:14px;line-height:1.72;max-width:400px;">
+          Meeting and event spaces are available by the hour or day. Perfect for professional gatherings, training sessions, and networking events of any size.
+        </p>
+
+        <ul class="ev__list">
+          <li class="ev__item"><span class="ev__num">01</span><span class="ev__name">Client Meetings</span><span class="ev__arr">→</span></li>
+          <li class="ev__item"><span class="ev__num">02</span><span class="ev__name">Business Presentations</span><span class="ev__arr">→</span></li>
+          <li class="ev__item"><span class="ev__num">03</span><span class="ev__name">Startup Meetups</span><span class="ev__arr">→</span></li>
+          <li class="ev__item"><span class="ev__num">04</span><span class="ev__name">Training Programmes</span><span class="ev__arr">→</span></li>
+          <li class="ev__item"><span class="ev__num">05</span><span class="ev__name">Workshops &amp; Seminars</span><span class="ev__arr">→</span></li>
+          <li class="ev__item"><span class="ev__num">06</span><span class="ev__name">Networking Events</span><span class="ev__arr">→</span></li>
+        </ul>
+
+        <a href="#contact" class="btn btn-primary" style="margin-top:32px;">Book an Event Space →</a>
+      </div>
+
+      <div class="ev__img reveal">
+        <img src="assets/images/space-08.png" alt="Events at ArrowRise">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CTA BAND
+══════════════════════════════════════════════════════════ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-band__inner">
+      <h2 class="cta-band__title">Ready to Rise? ↑</h2>
+      <div class="cta-band__btns">
+        <a href="tel:+919842384597" class="btn btn-ghost-w">Call +91 98423 84597</a>
+        <a href="#contact"          class="btn btn-white">Book a Tour →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT
+══════════════════════════════════════════════════════════ -->
+<section class="sec" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Find Us</span>
+    <h2 class="h2" style="margin-top:16px;margin-bottom:52px;">We're in Goldwins,<br>Coimbatore.</h2>
+
+    <div class="contact__grid">
+      <div class="contact__info">
+        <div>
+          <div class="contact__field-lbl">Address</div>
+          <div class="contact__field-val">
+            No. 3, Daskant Nagar,<br>
+            Goldwins, Coimbatore,<br>
+            Tamil Nadu 641014
+          </div>
+        </div>
+
+        <div>
+          <div class="contact__field-lbl">Phone</div>
+          <a href="tel:+919842384597" class="contact__field-val" style="color:var(--accent);">+91 98423 84597</a>
+          <div class="contact__field-sub">Kavin Sundar, Founder</div>
+        </div>
+
+        <div>
+          <div class="contact__field-lbl">What to Expect</div>
+          <p style="font-size:.9rem;line-height:1.72;color:var(--muted);">
+            Come by for a free tour. We'll walk you through the space, the plans, and help you figure out what works best for you or your team.
+          </p>
+        </div>
+
+        <div class="contact__hours">
+          <h4>Working Hours</h4>
+          <div class="contact__hr">
+            <span class="contact__hr-d">Monday – Friday</span>
+            <span>8:00 AM – 10:00 PM</span>
+          </div>
+          <div class="contact__hr">
+            <span class="contact__hr-d">Saturday</span>
+            <span>8:00 AM – 8:00 PM</span>
+          </div>
+          <div class="contact__hr">
+            <span class="contact__hr-d">Sunday</span>
+            <span>By Appointment</span>
+          </div>
+        </div>
+
+        <a href="tel:+919842384597" class="btn btn-primary" style="width:fit-content;">Call to Book a Tour →</a>
+      </div>
+
+      <div class="contact__map reveal">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=76.9710%2C10.9841%2C77.0310%2C11.0241&layer=mapnik&marker=11.0041%2C77.0010"
+          allowfullscreen
+          loading="lazy"
+          title="ArrowRise Co-Working Space Location">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div>
+        <div class="footer__logo">Arrow<span>↑</span>Rise</div>
+        <p class="footer__desc">A premium co-working space and innovation hub in Goldwins, Coimbatore. Your space to work, learn, and grow.</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__soc" aria-label="Instagram">In</a>
+          <a href="#" class="footer__soc" aria-label="Twitter/X">𝕏</a>
+          <a href="#" class="footer__soc" aria-label="LinkedIn">Li</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer__col-h">Spaces</div>
+        <div class="footer__col-links">
+          <a href="#spaces">Hot Desk</a>
+          <a href="#spaces">Dedicated Desk</a>
+          <a href="#spaces">Private Office</a>
+          <a href="#spaces">Meeting Rooms</a>
+          <a href="#spaces">Event Space</a>
+          <a href="#spaces">Virtual Office</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer__col-h">Company</div>
+        <div class="footer__col-links">
+          <a href="#about">About ArrowRise</a>
+          <a href="#innovation">Innovation Hub</a>
+          <a href="#events">Events</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer__col-h">Contact</div>
+        <div class="footer__col-links">
+          <a href="tel:+919842384597">+91 98423 84597</a>
+          <a href="#">Kavin Sundar, Founder</a>
+        </div>
+        <p class="footer__addr" style="margin-top:14px;">
+          No. 3, Daskant Nagar,<br>Goldwins, Coimbatore,<br>Tamil Nadu 641014
+        </p>
+        <div class="footer__col-links" style="margin-top:18px;">
+          <a href="assets/docs/arrowrise_brochure.pdf" download>↓ Download Brochure</a>
+          <a href="assets/docs/arrowrise_poster.pdf" download>↓ Download Poster</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy">© 2025 ArrowRise Co-Working Space. All rights reserved.</span>
+      <div class="footer__blnks">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  // ─── Sticky nav ───────────────────────────────
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 48);
+  }, { passive: true });
+
+  // ─── Mobile menu ──────────────────────────────
+  const burger  = document.getElementById('burger');
+  const mobMenu = document.getElementById('mobMenu');
+  const mobClose= document.getElementById('mobClose');
+
+  const openMenu  = () => { mobMenu.classList.add('open');   document.body.style.overflow = 'hidden'; };
+  const closeMenu = () => { mobMenu.classList.remove('open'); document.body.style.overflow = ''; };
+
+  burger.addEventListener('click', openMenu);
+  mobClose.addEventListener('click', closeMenu);
+  document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
+
+  // ─── Scroll reveal ────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => ro.observe(el));
+
+  // ─── Smooth anchor scroll ─────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) {
+        e.preventDefault();
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
